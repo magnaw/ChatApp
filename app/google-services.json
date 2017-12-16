@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "825115851044-tqebq59pells5lbp5hcqf95ogn4v430f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "chatapp.magnus.chatapp",
+            "certificate_hash": "0ea2c907d90fa8077d78c61687e58b24b3ed0108"
+          }
+        },
+        {
           "client_id": "825115851044-4hv48gudbvh3urhs2r6svt73blkt19c4.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "825115851044-4hv48gudbvh3urhs2r6svt73blkt19c4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
