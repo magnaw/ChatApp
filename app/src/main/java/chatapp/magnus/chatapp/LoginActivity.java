@@ -4,29 +4,18 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,17 +23,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Executor;
-
-import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
@@ -74,10 +56,10 @@ public class LoginActivity extends AppCompatActivity  {
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                SingletonApplications.user = firebaseAuth.getCurrentUser();
-                if (SingletonApplications.user != null) {
+                SingletonApplications.fbUser = firebaseAuth.getCurrentUser();
+                if (SingletonApplications.fbUser != null) {
                     // User is signed in
-                    Log.d("", "onAuthStateChanged:signed_in:" + SingletonApplications.user.getUid());
+                    Log.d("", "onAuthStateChanged:signed_in:" + SingletonApplications.fbUser.getUid());
 
                 } else {
                     // User is signed out
@@ -110,6 +92,14 @@ public class LoginActivity extends AppCompatActivity  {
             }
         });
 
+        Button registerButton = (Button) findViewById(R.id.email_sign_in_button2);
+        registerButton.setOnClickListener(new OnClickListener() {
+
+            public void onClick(View view) {
+                goToRegisterActivity();
+            }
+        });
+
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
@@ -138,7 +128,7 @@ public class LoginActivity extends AppCompatActivity  {
         boolean cancel = false;
         View focusView = null;
 
-        // Check for a valid password, if the user entered one.
+        // Check for a valid password, if the fbUser entered one.
         if (!isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
@@ -162,7 +152,7 @@ public class LoginActivity extends AppCompatActivity  {
             focusView.requestFocus();
         } else {
             // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
+            // perform the fbUser login attempt.
             showProgress(true);
             SignIn(email, password);
 //            mAuthTask = new UserLoginTask(email, password);
@@ -218,8 +208,9 @@ public class LoginActivity extends AppCompatActivity  {
 
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
+        // Check if fbUser is signed in (non-null) and update UI accordingly.
         if (mAuth.getCurrentUser() != null) {
+            SingletonApplications.fbUser = mAuth.getCurrentUser();
             goToMainActivity();
         }
     }
@@ -227,6 +218,13 @@ public class LoginActivity extends AppCompatActivity  {
     public void goToMainActivity() {
         finish();
         Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+    }
+
+    public void goToRegisterActivity() {
+        finish();
+        Intent i = new Intent(this, RegisterActivity.class);
         startActivity(i);
         overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
@@ -239,11 +237,11 @@ public class LoginActivity extends AppCompatActivity  {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
+                            // Sign in success, update UI with the signed-in fbUser's information
                             makeToast("Signup complete!");
                             FirebaseUser user = mAuth.getCurrentUser();
                         } else {
-                            // If sign in fails, display a message to the user.
+                            // If sign in fails, display a message to the fbUser.
                             makeToast("Error signing up, try again");
                         }
 
@@ -258,11 +256,11 @@ public class LoginActivity extends AppCompatActivity  {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            SingletonApplications.user = mAuth.getCurrentUser();
+                            // Sign in success, update UI with the signed-in fbUser's information
+                            SingletonApplications.fbUser = mAuth.getCurrentUser();
                             goToMainActivity();
                         } else {
-                            // If sign in fails, display a message to the user.
+                            // If sign in fails, display a message to the fbUser.
                         }
                         // ...
                         showProgress(false);
