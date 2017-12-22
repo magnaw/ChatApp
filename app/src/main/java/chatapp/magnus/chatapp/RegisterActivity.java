@@ -215,10 +215,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 
+    public void testAnim() {
+        showProgress(true);
+    }
+
 
     @Override
     public void onClick(View view) {
         if (view == mregisterButton)
             attemptRegister();
+            //testAnim();
     }
 }
