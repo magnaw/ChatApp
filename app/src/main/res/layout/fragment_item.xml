@@ -12,7 +12,6 @@
             android:id="@+id/contentTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <ImageView
@@ -25,32 +24,38 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:orientation="horizontal">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/imageUpvote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:contentDescription="@string/upVoteDescription"
+            android:layout_marginStart="5dp"
+            android:contentDescription="@string/contentDescription"
             app:srcCompat="@drawable/ic_arrow_upward_black_24dp" />
 
-        <TextView
-                android:id="@+id/contentVotes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_margin"
-                android:layout_weight="1"
-                android:textAppearance="?attr/textAppearanceListItem" />
 
-        <ImageButton
+
+        <TextView
+            android:id="@+id/contentVotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textAlignment="center"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+
+        <ImageView
             android:id="@+id/imageDownvote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:contentDescription="@string/downVoteDescription"
-            app:srcCompat="@drawable/ic_arrow_downward_black_24dp" />
+            android:layout_marginStart="5dp"
+            android:contentDescription="@string/contentDescription"
+            app:srcCompat="@drawable/ic_arrow_downward_black_24dp"  />
+
     </LinearLayout>
 
 </LinearLayout>

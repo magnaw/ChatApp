@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .placeholder(R.drawable.ic_menu_gallery)
                         .into(navAvatar);
                 navName.setText(SingletonApplications.localUser.getName());
-                navEmail.setText(SingletonApplications.localUser.getMail());
+                navEmail.setText(SingletonApplications.fbUser.getEmail());
 
             }
 

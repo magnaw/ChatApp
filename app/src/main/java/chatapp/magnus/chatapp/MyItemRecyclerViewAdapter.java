@@ -132,8 +132,8 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         public final TextView mTitleView;
         public final TextView mVotesView;
         public final ImageView mImageView;
-        public final ImageButton mUpvoteButton;
-        public final ImageButton mDownvoteButton;
+        public final ImageView mUpvoteButton;
+        public final ImageView mDownvoteButton;
         public ContentItem mItem;
 
         public ViewHolder(View view) {
@@ -142,8 +142,8 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             mTitleView = (TextView) view.findViewById(R.id.contentTitle);
             mVotesView = (TextView) view.findViewById(R.id.contentVotes);
             mImageView = (ImageView) view.findViewById(R.id.imageContent);
-            mUpvoteButton = (ImageButton) view.findViewById(R.id.imageUpvote);
-            mDownvoteButton = (ImageButton) view.findViewById(R.id.imageDownvote);
+            mUpvoteButton = (ImageView) view.findViewById(R.id.imageUpvote);
+            mDownvoteButton = (ImageView) view.findViewById(R.id.imageDownvote);
 
 
 
