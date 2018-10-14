@@ -1,14 +1,17 @@
 package chatapp.magnus.chatapp;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
+
 
 import chatapp.magnus.chatapp.ListFragment.OnListFragmentInteractionListener;
 import chatapp.magnus.chatapp.posts.ContentItem;
@@ -54,6 +58,10 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
         context = parent.getContext();
+
+
+
+
         return new ViewHolder(view);
     }
 
@@ -93,6 +101,19 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                 cont.votes--;
                 myRef.child("memes").child(mValues.get(position).id).setValue(cont);
 //                holder.mVotesView.setText(mValues.get(position).votes+"");
+            }
+        });
+
+        holder.mCommentsButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                SingletonApplications.commentID = holder.mItem.id;
+                makeToast(SingletonApplications.commentID+"");
+
+
+
+
+
             }
         });
 
@@ -139,6 +160,11 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         return formattedNumber.length()>4 ?  formattedNumber.replaceAll("\\.[0-9]+", "") : formattedNumber;
     }
 
+    public void makeToast(String option) {
+        Toast.makeText(context, option, Toast.LENGTH_SHORT).show();
+    }
+
+
     @Override
     public int getItemCount() {
         return mValues.size();
@@ -151,6 +177,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         public final ImageView mImageView;
         public final ImageView mUpvoteButton;
         public final ImageView mDownvoteButton;
+        public final LinearLayout mCommentsButton;
         public ContentItem mItem;
 
         public ViewHolder(View view) {
@@ -161,6 +188,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             mImageView = (ImageView) view.findViewById(R.id.imageContent);
             mUpvoteButton = (ImageView) view.findViewById(R.id.imageUpvote);
             mDownvoteButton = (ImageView) view.findViewById(R.id.imageDownvote);
+            mCommentsButton = (LinearLayout) view.findViewById(R.id.commentLayout);
 
 
 

@@ -14,6 +14,7 @@ public class SingletonApplications extends Application {
 
     public static FirebaseUser fbUser;
     public static UserDTO localUser;
+    public static String commentID;
 
 
     @Override

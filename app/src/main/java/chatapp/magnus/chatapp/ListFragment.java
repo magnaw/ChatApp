@@ -3,12 +3,14 @@ package chatapp.magnus.chatapp;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -51,10 +53,9 @@ public class ListFragment extends Fragment {
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static ListFragment newInstance(int columnCount) {
+    public static ListFragment newInstance() {
         ListFragment fragment = new ListFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
         return fragment;
     }
@@ -63,9 +64,7 @@ public class ListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
+
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
@@ -152,6 +151,10 @@ public class ListFragment extends Fragment {
         }
     }
 
+
+    public void makeToast(String option) {
+        Toast.makeText(getActivity(), option, Toast.LENGTH_SHORT).show();
+    }
 
 
 }

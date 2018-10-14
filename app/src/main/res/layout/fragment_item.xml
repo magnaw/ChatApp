@@ -12,6 +12,8 @@
             android:id="@+id/contentTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
@@ -29,44 +31,73 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
+        android:weightSum="2"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/imageUpvote"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:contentDescription="@string/contentDescription"
-            app:srcCompat="@drawable/ic_arrow_upward_black_24dp" />
+            android:layout_weight="1"
+            android:weightSum="3"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageUpvote"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/contentDescription"
+                app:srcCompat="@drawable/ic_arrow_upward_black_24dp" />
+
+            <TextView
+                android:id="@+id/contentVotes"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+            <ImageView
+                android:id="@+id/imageDownvote"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/contentDescription"
+                app:srcCompat="@drawable/ic_arrow_downward_black_24dp" />
+        </LinearLayout>
 
 
-
-        <TextView
-            android:id="@+id/contentVotes"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:textAlignment="center"
-            android:textAppearance="?attr/textAppearanceListItem" />
-
-
-        <ImageView
-            android:id="@+id/imageDownvote"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:id="@+id/commentLayout"
             android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:contentDescription="@string/contentDescription"
-            app:srcCompat="@drawable/ic_arrow_downward_black_24dp"  />
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="@string/comments" />
+            <ImageView
+                android:id="@+id/imageComment"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:contentDescription="@string/contentDescription"
+                app:srcCompat="@drawable/ic_mode_comment_black_24dp" />
+
+
+            <TextView
+                android:id="@+id/contentComments"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:text="comments"
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceListItem" />
+        </LinearLayout>
 
     </LinearLayout>
 
